@@ -50,4 +50,9 @@ def delete_user(user_id: int):
             return u
     if any(u.user_id == user.user_id for u in users):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="user_id already exists")
-    
+
+@app.get("/health")
+def health():
+    return "status: ok"
+
+ 
