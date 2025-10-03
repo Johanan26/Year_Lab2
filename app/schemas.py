@@ -1,4 +1,6 @@
 # app/schemas.py
+
+#sets the parameterse for our variables
 from pydantic import BaseModel, EmailStr, constr, conint
 
 class User(BaseModel):
