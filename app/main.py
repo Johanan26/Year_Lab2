@@ -37,14 +37,16 @@ def add_user(user: User):
 # Add a student id to the User class that must start with S followed by exactly 7 digits
 
 #Updates users and shows an error if user already exists
-@app.put("/api/users/{user_id}", status_code=status.HTTP_201_CREATED)
+@app.put("/api/users/{user_id}")
 def update_user(user_id: int, updated_user: User):
     for i, u in enumerate(users):
-        if u.user_id == user_id:  
+        if u.user_id == user_id:
             users[i] = updated_user
             return updated_user
-    if any(u.user_id == user.user_id for u in users):
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="user_id already exists")
+        raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="User not found"
+    )
 
 #Deletes users and shows an error if user id is not found
 @app.delete("/api/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
